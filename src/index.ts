@@ -1,14 +1,6 @@
 import create from './create';
+import go from './go';
 
-const {context, go, Match, Route, Router, useMatch, Link, Switch} = create();
+const {context, Match, Route, Router, useMatch, Link, Switch} = create(go);
 
-export {
-  context,
-  go,
-  Match,
-  Route,
-  Router,
-  useMatch,
-  Link,
-  Switch,
-};
+export {context, go, Match, Route, Router, useMatch, Link, Switch};

@@ -10,24 +10,24 @@ export interface SwitchProps {
 */
 
 const createSwitch = (context: Context<RouterData>, Route: FC<MatchProps>): FC<any> => {
-  const Switch: FC<any> = ({children}) => {
-    const {route} = useContext<RouterData>(context);
+   const Switch: FC<any> = ({children}) => {
+      const {route} = useContext<RouterData>(context);
 
-    const elements = Children.toArray(children);
-    for (const element of elements) {
-      if (process.env.NODE_ENV !== 'production') {
-        if ((typeof element !== 'object') || ((element as any).type !== Route)) {
-          throw new TypeError('All <Switch> children must be <Route> elements.');
-        }
+      const elements = Children.toArray(children);
+      for (const element of elements) {
+         if (process.env.NODE_ENV !== 'production') {
+            if (typeof element !== 'object' || (element as any).type !== Route) {
+               throw new TypeError('All <Switch> children must be <Route> elements.');
+            }
+         }
+         const {match, exact} = (element as any).props;
+         if (createMatcher(match, exact)(route)) return element;
       }
-      const {match, exact} = (element as any).props;
-      if (createMatcher(match, exact)(route)) return element;
-    }
 
-    return null;
-  };
+      return null;
+   };
 
-  return Switch;
+   return Switch;
 };
 
 export default createSwitch;
