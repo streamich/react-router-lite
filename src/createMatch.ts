@@ -6,7 +6,7 @@ import {RouterData, RouterProps} from './createRouter';
 import {Matcher} from './createMatcher';
 
 export interface MatchProps extends UniversalProps<RouterData> {
-   match?: Matcher;
+   match?: Matcher | string | RegExp;
    exact?: boolean;
    truncate?: boolean;
 }

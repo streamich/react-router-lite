@@ -1,6 +1,6 @@
 import {createContext, Context} from 'react';
 import {Go} from './go';
-import createProvider, {RouterData} from './createRouter';
+import createRouter, {RouterData} from './createRouter';
 import createUseMatch from './createUseMatch';
 import createMatch from './createMatch';
 import createRoute from './createRoute';
@@ -9,7 +9,7 @@ import createLink from './createLink';
 
 const create = (go: Go, data: RouterData = {fullRoute: '', route: ''}) => {
    const context: Context<RouterData> = createContext(data);
-   const Router = createProvider(context);
+   const Router = createRouter(context);
    const useMatch = createUseMatch(context);
    const Match = createMatch(useMatch, Router);
    const Route = createRoute(Match);

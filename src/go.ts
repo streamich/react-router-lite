@@ -8,8 +8,10 @@ export interface IGoParams {
 
 export type Go = (page: string, params?: IGoParams) => void;
 
-const go: Go = (page: string, {replace, title, state}: IGoParams = {}) => {
-   if (isClient) history[replace ? 'replaceState' : 'pushState'](state, title || '', page);
-};
+const go: Go = isClient
+   ? (page: string, {replace, title, state}: IGoParams = {}) => {
+      history[replace ? 'replaceState' : 'pushState'](state, title || '', page);
+   }
+   : (() => {}) as Go;
 
 export default go;
