@@ -2,7 +2,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {Router, Route} from '..';
 
-storiesOf('Main', module)
+storiesOf('<Route>', module)
    .add('Children', () => {
       return (
          <Router route='/bar'>
