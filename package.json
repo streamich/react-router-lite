@@ -33,7 +33,9 @@
   },
   "keywords": [],
   "dependencies": {
-    "react-universal-interface": "^0.6.0"
+    "history": "^4.9.0",
+    "react-universal-interface": "^0.6.0",
+    "react-use": "^8.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
@@ -61,7 +63,6 @@
     "pretty-quick": "^1.10.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-use": "^8.1.0",
     "rimraf": "^2.6.3",
     "semantic-release": "^15.13.3",
     "storybook-readme": "^5.0.1",
