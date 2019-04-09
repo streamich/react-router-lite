@@ -7,7 +7,7 @@ const Demo: React.FC<{}> = () => {
    const {pathname} = useLocation();
 
    return (
-      <Router route={pathname}>
+      <Router route={pathname || ''}>
          <div>
             <div>
                <button onClick={() => go('page-1')}>Page 1</button>
