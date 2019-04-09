@@ -29,8 +29,6 @@ const createLink = (go: Go) => {
 
       const onClick = useCallback(
          (event) => {
-            originalClick(event);
-
             if (
                !event.defaultPrevented && // onClick prevented default
                event.button === 0 && // ignore everything but left clicks
@@ -42,6 +40,7 @@ const createLink = (go: Go) => {
                   replace,
                   state: state ? state(props) : undefined,
                });
+               originalClick(event);
             }
          },
          [originalClick, replace, target, state],
