@@ -13,7 +13,7 @@ export interface LinkProps extends React.AllHTMLAttributes<any> {
 }
 
 const createLink = (go: Go) => {
-   const Link: FC<LinkProps> = forwardRef((props, ref) => {
+   const Link: FC<LinkProps> = forwardRef<any, LinkProps>((props, ref) => {
       /* tslint:disable */
       let {
          replace,
