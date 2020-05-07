@@ -1,3 +1,16 @@
+# [1.2.0](https://github.com/streamich/react-router-lite/compare/v1.1.1...v1.2.0) (2020-05-07)
+
+
+### Bug Fixes
+
+* 🐛 build down to ES5 ([2953774](https://github.com/streamich/react-router-lite/commit/2953774))
+* 🐛 fix TypeScript error ([6b6e369](https://github.com/streamich/react-router-lite/commit/6b6e369))
+
+
+### Features
+
+* 🎸 forward ref in <Link> component ([46b4f8e](https://github.com/streamich/react-router-lite/commit/46b4f8e))
+
 ## [1.1.1](https://github.com/streamich/react-router-lite/compare/v1.1.0...v1.1.1) (2019-04-09)
 
 
