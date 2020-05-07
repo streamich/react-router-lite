@@ -13,9 +13,7 @@ const Demo: React.FC<{}> = () => {
                <button onClick={() => go('page-1')}>Page 1</button>
                <Link to="page-2">Page 2</Link>
             </div>
-            <div>
-               Route: {pathname}
-            </div>
+            <div>Route: {pathname}</div>
             <div>
                <Route match="/page-1">This is page one</Route>
                <Route match="/page-2">This is page two</Route>
@@ -25,5 +23,4 @@ const Demo: React.FC<{}> = () => {
    );
 };
 
-storiesOf('useLocation', module)
-  .add('Real navigation', () => <Demo />)
+storiesOf('useLocation', module).add('Real navigation', () => <Demo />);

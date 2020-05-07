@@ -7,48 +7,48 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import {Router, Route} from '..';
 
 describe('route SSR', () => {
-  it('renders without crashing', () => {
-    const html = renderToStaticMarkup(
-      <Router route='/foo/bar'>
-        <Route>
-          <span>baz</span>
-        </Route>
-      </Router>
-    );
+   it('renders without crashing', () => {
+      const html = renderToStaticMarkup(
+         <Router route="/foo/bar">
+            <Route>
+               <span>baz</span>
+            </Route>
+         </Router>,
+      );
 
-    expect(html).toBe('<span>baz</span>');
-  });
+      expect(html).toBe('<span>baz</span>');
+   });
 
-  it('renders matching routes', () => {
-    const html = renderToStaticMarkup(
-      <Router route='/foo/bar'>
-        <Route>
-          <span>1</span>
-        </Route>
-        <Route match='/baz'>
-          <span>2</span>
-        </Route>
-        <Route match='/foo'>
-          <span>3</span>
-        </Route>
-        <Route match='/foo/bar'>
-          <span>4</span>
-        </Route>
-      </Router>
-    );
+   it('renders matching routes', () => {
+      const html = renderToStaticMarkup(
+         <Router route="/foo/bar">
+            <Route>
+               <span>1</span>
+            </Route>
+            <Route match="/baz">
+               <span>2</span>
+            </Route>
+            <Route match="/foo">
+               <span>3</span>
+            </Route>
+            <Route match="/foo/bar">
+               <span>4</span>
+            </Route>
+         </Router>,
+      );
 
-    expect(html).toBe('<span>1</span><span>3</span><span>4</span>');
-  });
+      expect(html).toBe('<span>1</span><span>3</span><span>4</span>');
+   });
 
-  it('matches partial step', () => {
-    const html = renderToStaticMarkup(
-      <Router route='/foo/bar'>
-        <Route match='/foo/b'>
-          <span>1</span>
-        </Route>
-      </Router>
-    );
+   it('matches partial step', () => {
+      const html = renderToStaticMarkup(
+         <Router route="/foo/bar">
+            <Route match="/foo/b">
+               <span>1</span>
+            </Route>
+         </Router>,
+      );
 
-    expect(html).toBe('<span>1</span>');
-  });
+      expect(html).toBe('<span>1</span>');
+   });
 });

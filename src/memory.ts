@@ -12,9 +12,11 @@ const {context, go, Match, Route, Router, useMatch, Link, Switch} = create(memor
 
 const Provider: FC<{route?: string}> = ({route: routeProp, children}) => {
    const [route, setRoute] = useState(history.location.pathname || routeProp);
-   useEffect(() => history.listen((location) => {
-      setRoute(location.pathname);
-   }));
+   useEffect(() =>
+      history.listen((location) => {
+         setRoute(location.pathname);
+      }),
+   );
    return h(Router, {route, children});
 };
 
