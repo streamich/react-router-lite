@@ -19,5 +19,4 @@ const Demo: React.FC<{}> = () => {
    );
 };
 
-storiesOf('memory/<Provider>', module)
-  .add('Real navigation', () => <Demo />)
+storiesOf('memory/<Provider>', module).add('Real navigation', () => <Demo />);
