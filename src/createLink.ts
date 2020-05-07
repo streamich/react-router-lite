@@ -1,4 +1,4 @@
-import {createElement as h, useCallback, FC, ComponentType} from 'react';
+import {createElement as h, useCallback, FC, ComponentType, forwardRef, RefAttributes} from 'react';
 import {Go} from './go';
 
 const noop = (() => {}) as any;
@@ -13,7 +13,7 @@ export interface LinkProps extends React.AllHTMLAttributes<any> {
 }
 
 const createLink = (go: Go) => {
-   const Link: FC<LinkProps> = (props) => {
+   const Link: FC<LinkProps> = forwardRef((props, ref) => {
       /* tslint:disable */
       let {
          replace,
@@ -46,8 +46,9 @@ const createLink = (go: Go) => {
          [originalClick, replace, target, state],
       );
 
-      const attr: React.AllHTMLAttributes<any> = {
+      const attr: React.AllHTMLAttributes<any> & RefAttributes<any> = {
          ...rest,
+         ref,
          onClick,
       };
 
@@ -57,7 +58,7 @@ const createLink = (go: Go) => {
       }
 
       return h(component, attr);
-   };
+   });
 
    return Link;
 };
