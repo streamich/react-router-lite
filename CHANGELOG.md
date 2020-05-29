@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/streamich/react-router-lite/compare/v1.2.0...v1.3.0) (2020-05-29)
+
+
+### Features
+
+* 🎸 bump dependencies ([1c23cfa](https://github.com/streamich/react-router-lite/commit/1c23cfa))
+
 # [1.2.0](https://github.com/streamich/react-router-lite/compare/v1.1.1...v1.2.0) (2020-05-07)
 
 
