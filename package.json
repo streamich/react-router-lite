@@ -38,8 +38,11 @@
    "keywords": [],
    "dependencies": {
       "history": "^4.9.0",
-      "react-universal-interface": "^0.6.0",
-      "react-use": "^8.1.1"
+      "react-universal-interface": "^0.6.2",
+      "react-use": "^15.1.0"
+   },
+   "peerDependencies": {
+      "tslib": "*"
    },
    "devDependencies": {
       "@babel/core": "^7.4.3",
@@ -76,7 +79,8 @@
       "tslint": "^5.15.0",
       "tslint-config-common": "^1.6.0",
       "typescript": "^3.4.2",
-      "url-loader": "^1.1.2"
+      "url-loader": "^1.1.2",
+      "tslib": "^2.0.0"
    },
    "types": "lib/index.d.ts",
    "typings": "lib/index.d.ts",
