@@ -6,6 +6,7 @@ import createMatch from './createMatch';
 import createRoute from './createRoute';
 import createSwitch from './createSwitch';
 import createLink from './createLink';
+import createRedirect from './createRedirect';
 
 const create = (go: Go = goDefault, data: RouterData = {fullRoute: '', route: ''}) => {
    const context: Context<RouterData> = createContext(data);
@@ -15,6 +16,7 @@ const create = (go: Go = goDefault, data: RouterData = {fullRoute: '', route: ''
    const Route = createRoute(Match);
    const Switch = createSwitch(context, Route);
    const Link = createLink(go);
+   const Redirect = createRedirect(go);
 
    return {
       go,
@@ -25,6 +27,7 @@ const create = (go: Go = goDefault, data: RouterData = {fullRoute: '', route: ''
       Route,
       Switch,
       Link,
+      Redirect,
    };
 };
 
