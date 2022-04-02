@@ -1,4 +1,4 @@
-import {FC, createElement as h, useEffect, useLayoutEffect} from 'react';
+import {FC, createElement as h, useEffect, useLayoutEffect, Fragment} from 'react';
 import {Go, IGoParams} from './go';
 
 const isBrowser = typeof window !== 'undefined';
@@ -9,12 +9,12 @@ export interface RedirectProps extends IGoParams {
 }
 
 const createRedirect = (go: Go): FC<RedirectProps> => {
-   const Redirect: FC<RedirectProps> = (props) => {
+   const Redirect: FC<RedirectProps> = ({to, replace, state, title, children}) => {
       useIsomorphicLayoutEffect(() => {
-         go(props.to, props);
+         go(to, {replace, state, title});
       }, []);
 
-      return null;
+      return children ? h(Fragment, {}, children) : null;
    };
 
    return Redirect;
