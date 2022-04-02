@@ -10,7 +10,7 @@ export interface SwitchProps {
 */
 
 const createSwitch = (context: Context<RouterData>, Route: FC<MatchProps>): FC<any> => {
-   const Switch: FC<any> = ({children}) => {
+   const Switch: FC = (({children}) => {
       const {route} = useContext<RouterData>(context);
 
       const elements = Children.toArray(children);
@@ -25,7 +25,7 @@ const createSwitch = (context: Context<RouterData>, Route: FC<MatchProps>): FC<a
       }
 
       return null;
-   };
+   }) as FC;
 
    return Switch;
 };

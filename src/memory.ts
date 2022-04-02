@@ -8,7 +8,7 @@ const memoryGo: Go = (page: string, {replace, title, state}: IGoParams = {}) => 
    history.push(page, state);
 };
 
-const {context, go, Match, Route, Router, useMatch, Link, Switch} = create(memoryGo);
+const {context, go, Match, Route, Router, useMatch, Link, Switch, Redirect} = create(memoryGo);
 
 const Provider: FC<{route?: string}> = ({route: routeProp, children}) => {
    const [route, setRoute] = useState(history.location.pathname || routeProp);
@@ -20,4 +20,4 @@ const Provider: FC<{route?: string}> = ({route: routeProp, children}) => {
    return h(Router, {route, children});
 };
 
-export {Provider, context, go, Match, Route, Router, useMatch, Link, Switch};
+export {Provider, context, go, Match, Route, Router, useMatch, Link, Switch, Redirect};

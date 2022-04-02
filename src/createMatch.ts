@@ -21,7 +21,7 @@ const createMatch = (useMatch: UseMatch, Router: FC<RouterProps>): FC<MatchProps
       if (matches && truncate) {
          element = h(Router, {
             fullRoute: route,
-            route: route.substr(matches[0].length),
+            route: route.substring(matches[0].length),
             parent: data,
             children: element,
          });
