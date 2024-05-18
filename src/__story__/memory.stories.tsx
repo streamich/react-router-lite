@@ -1,7 +1,12 @@
 import * as React from 'react';
-import {storiesOf} from '@storybook/react';
-import {Router, Route, Link, go} from '..';
+import type {Meta, StoryObj} from '@storybook/react';
+import {Router, Route, Link} from '..';
 import {createMemoryHistory} from 'history';
+
+const meta: Meta<typeof Router> = {
+   component: Router,
+   argTypes: {},
+};
 
 const Demo: React.FC<{}> = () => {
    const history = React.useMemo(() => createMemoryHistory(), []);
@@ -14,11 +19,11 @@ const Demo: React.FC<{}> = () => {
    }, [history]);
 
    return (
-      <Router route={route}>
+      <Router route={route} go={(path: string) => history.push(path)}>
          <div>
             <div>
-               <button onClick={() => go('page-1')}>Page 1</button>
-               <Link to="page-2">Page 2</Link>
+               <button onClick={() => history.push('/page-1')}>Page 1</button>
+               <Link to="/page-2">Page 2</Link>
             </div>
             <div>
                <Route match="/page-1">This is page one</Route>
@@ -29,4 +34,8 @@ const Demo: React.FC<{}> = () => {
    );
 };
 
-storiesOf('memory/<Provider>', module).add('Real navigation', () => <Demo />);
+export default meta;
+
+export const Primary: StoryObj<typeof meta> = {
+   render: () => <Demo />,
+};

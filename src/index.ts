@@ -14,16 +14,18 @@ export const context = React.createContext<types.RouterContextValue>(null!);
 
 export interface RouterProps {
    route: string;
+   go?: types.Go;
    children?: React.ReactNode;
    fullRoute?: string;
    parent?: types.MatchData;
 }
 
 export const Router: React.FC<RouterProps> = (props) => {
-   const {route, fullRoute, parent, children} = props;
+   const {route, fullRoute, parent, go, children} = props;
    const value: types.RouterContextValue = {
       fullRoute: fullRoute || route,
       route,
+      go,
       parent,
    };
    return h(context.Provider, {value}, children);
@@ -61,12 +63,8 @@ export const useMatch = (match: string | RegExp | types.Matcher, exact?: boolean
 };
 
 export interface MatchProps {
-   render?:
-      | ((data: types.MatchData) => React.ReactNode)
-      | React.ReactNode;
-   children?:
-      | ((data: types.MatchData) => React.ReactNode)
-      | React.ReactNode;
+   render?: ((data: types.MatchData) => React.ReactNode) | React.ReactNode;
+   children?: ((data: types.MatchData) => React.ReactNode) | React.ReactNode;
    match?: string | RegExp | types.Matcher;
    exact?: boolean;
    truncate?: boolean;
