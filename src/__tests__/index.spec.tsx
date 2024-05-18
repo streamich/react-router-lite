@@ -37,6 +37,21 @@ describe('browser', () => {
       expect(html).toBe('<span>1</span><span>3</span><span>4</span>');
    });
 
+   it('can truncate routes', () => {
+      const html = renderToString(
+         <Router route="/foo/bar">
+            <Route match={'/foo'} truncate>
+               <span>foo</span>
+               <Route match="/bar">
+                  <span>bar</span>
+               </Route>
+            </Route>
+         </Router>,
+      );
+
+      expect(html).toBe('<span>foo</span><span>bar</span>');
+   });
+
    it('<Switch> renders only one matching route', () => {
       const html = renderToString(
          <Router route="/foo/bar">
@@ -68,7 +83,15 @@ describe('browser', () => {
                <Route match="/home">
                   <span>1</span>
                </Route>
-               <Route match="/foo" render={() => <><Redirect to="/home" />redirecting...</>} />
+               <Route
+                  match="/foo"
+                  render={() => (
+                     <>
+                        <Redirect to="/home" />
+                        redirecting...
+                     </>
+                  )}
+               />
                <Route match="/foo/bar">
                   <span>4</span>
                </Route>

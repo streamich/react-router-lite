@@ -55,8 +55,8 @@ export const useMatch = (match: string | RegExp | types.Matcher, exact?: boolean
 };
 
 export interface MatchProps {
-   render?: ((data: types.MatchData) => React.ReactElement | null) | React.ReactElement | null;
-   children?: ((data: types.MatchData) => React.ReactElement | null) | React.ReactElement | null;
+   render?: ((data: types.MatchData) => React.ReactElement[] | React.ReactElement | null) | React.ReactElement[] | React.ReactElement | null;
+   children?: ((data: types.MatchData) => React.ReactElement[] | React.ReactElement | null) | React.ReactElement[] | React.ReactElement | null;
    match?: string | RegExp | types.Matcher;
    exact?: boolean;
    truncate?: boolean;
@@ -75,7 +75,7 @@ export const Match: React.FC<MatchProps> = (props) => {
          children: element,
       });
    }
-   return element;
+   return element instanceof Array ? h(React.Fragment, null, element) : element;
 };
 
 export const Route: React.FC<MatchProps> = ({children, render = children, ...rest}) =>
