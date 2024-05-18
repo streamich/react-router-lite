@@ -131,6 +131,8 @@ export const Redirect: React.FC<RedirectProps> = ({to, ...params}) => {
    return null;
 };
 
+// --------------------------------------------------------------------- <Link>
+
 const isModifiedEvent = (event: React.MouseEvent) =>
    !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 
@@ -141,8 +143,6 @@ export interface LinkProps extends React.AllHTMLAttributes<any> {
    a?: boolean;
    comp?: string | React.ComponentType<any>;
 }
-
-// --------------------------------------------------------------------- <Link>
 
 export const Link: React.FC<LinkProps> = React.forwardRef<any, LinkProps>((props, ref) => {
    const {replace, state, to = '', a, comp = a ? 'a' : 'button', onClick: originalClick, target, ...rest} = props;
