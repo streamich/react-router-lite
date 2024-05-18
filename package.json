@@ -16,8 +16,6 @@
       "lib/"
    ],
    "scripts": {
-      "prettier": "prettier --ignore-path .gitignore --write 'src/**/*.{ts,tsx,js,jsx}'",
-      "prettier:diff": "prettier -l 'src/**/*.{ts,tsx,js,jsx}'",
       "tslint": "tslint 'src/**/*.{js,jsx,ts,tsx}' -t verbose",
       "clean": "rimraf lib",
       "build": "tsc",
@@ -25,13 +23,6 @@
       "release": "semantic-release",
       "storybook": "storybook dev -p 6006",
       "build-storybook": "storybook build"
-   },
-   "husky": {
-      "hooks": {
-         "pre-commit": "pretty-quick --staged && yarn tslint",
-         "pre-push": "yarn prettier:diff",
-         "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-      }
    },
    "keywords": [],
    "peerDependencies": {
@@ -61,14 +52,13 @@
       "babel-loader": "^8.0.5",
       "fork-ts-checker-webpack-plugin": "^1.0.1",
       "history": "^5.3.0",
-      "husky": "^4.2.5",
       "jest": "^24.7.1",
-      "prettier": "^3.2.5",
-      "pretty-quick": "^4.0.0",
       "react": "^18.3.1",
       "react-dom": "^18.3.1",
+      "react-use": "^17.5.0",
       "rimraf": "^2.6.3",
       "rx-use": "^1.8.1",
+      "rxjs": "^7.8.1",
       "semantic-release": "^15.13.3",
       "storybook": "^8.1.1",
       "ts-jest": "^24.0.2",
