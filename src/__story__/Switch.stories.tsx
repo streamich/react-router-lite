@@ -1,10 +1,18 @@
 import * as React from 'react';
-import {storiesOf} from '@storybook/react';
-import {Router, Route, Switch} from '..';
+import type {Meta, StoryObj} from '@storybook/react';
+import {Router, Switch, Route} from '..';
 
-storiesOf('<Switch>', module)
-   .add('Matches first route', () => (
-      <Router route="/test">
+const meta: Meta<typeof Router> = {
+   component: Router,
+   argTypes: {},
+};
+
+export default meta;
+
+export const FirstRoute: StoryObj<typeof meta> = {
+   args: {
+      route: '/test',
+      children: (
          <Switch>
             <Route match="/test" exact>
                <div>First route</div>
@@ -13,10 +21,14 @@ storiesOf('<Switch>', module)
                <div>Second route</div>
             </Route>
          </Switch>
-      </Router>
-   ))
-   .add('Matches first matching route', () => (
-      <Router route="/test">
+      ),
+   },
+};
+
+export const FirstRoute2: StoryObj<typeof meta> = {
+   args: {
+      route: '/test',
+      children: (
          <Switch>
             <Route match="/te" exact>
                <div>SHOULD NOT MATCH</div>
@@ -31,5 +43,6 @@ storiesOf('<Switch>', module)
                <div>SHOULD NOT MATCH</div>
             </Route>
          </Switch>
-      </Router>
-   ));
+      ),
+   },
+};

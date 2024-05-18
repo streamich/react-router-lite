@@ -1,11 +1,15 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import * as React from 'react';
-import {renderToStaticMarkup} from 'react-dom/server';
 import {render} from 'react-dom';
-import {Router, Route, Switch, Redirect, go} from '../memory';
+import {renderToString} from 'react-dom/server';
+import {Router, Route, Switch, Redirect} from '..';
 
 describe('browser', () => {
    it('renders without crashing', () => {
-      const html = renderToStaticMarkup(
+      const html = renderToString(
          <Router route="/foo/bar">
             <Route>
                <span>baz</span>
@@ -17,7 +21,7 @@ describe('browser', () => {
    });
 
    it('renders matching routes', () => {
-      const html = renderToStaticMarkup(
+      const html = renderToString(
          <Router route="/foo/bar">
             <Route>
                <span>1</span>
@@ -37,8 +41,23 @@ describe('browser', () => {
       expect(html).toBe('<span>1</span><span>3</span><span>4</span>');
    });
 
+   it('can truncate routes', () => {
+      const html = renderToString(
+         <Router route="/foo/bar">
+            <Route match={'/foo'} truncate>
+               <span>foo</span>
+               <Route match="/bar">
+                  <span>bar</span>
+               </Route>
+            </Route>
+         </Router>,
+      );
+
+      expect(html).toBe('<span>foo</span><span>bar</span>');
+   });
+
    it('<Switch> renders only one matching route', () => {
-      const html = renderToStaticMarkup(
+      const html = renderToString(
          <Router route="/foo/bar">
             <Switch>
                <Route match="/home">
@@ -68,7 +87,15 @@ describe('browser', () => {
                <Route match="/home">
                   <span>1</span>
                </Route>
-               <Route match="/foo">{() => <Redirect to="/home">redirecting...</Redirect>}</Route>
+               <Route
+                  match="/foo"
+                  render={() => (
+                     <>
+                        <Redirect to="/home" />
+                        redirecting...
+                     </>
+                  )}
+               />
                <Route match="/foo/bar">
                   <span>4</span>
                </Route>
@@ -101,7 +128,7 @@ describe('browser', () => {
    });
 
    it('matches partial step', () => {
-      const html = renderToStaticMarkup(
+      const html = renderToString(
          <Router route="/foo/bar">
             <Route match="/foo/b">
                <span>1</span>
