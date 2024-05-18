@@ -55,8 +55,16 @@ export const useMatch = (match: string | RegExp | types.Matcher, exact?: boolean
 };
 
 export interface MatchProps {
-   render?: ((data: types.MatchData) => React.ReactElement[] | React.ReactElement | null) | React.ReactElement[] | React.ReactElement | null;
-   children?: ((data: types.MatchData) => React.ReactElement[] | React.ReactElement | null) | React.ReactElement[] | React.ReactElement | null;
+   render?:
+      | ((data: types.MatchData) => React.ReactElement[] | React.ReactElement | null)
+      | React.ReactElement[]
+      | React.ReactElement
+      | null;
+   children?:
+      | ((data: types.MatchData) => React.ReactElement[] | React.ReactElement | null)
+      | React.ReactElement[]
+      | React.ReactElement
+      | null;
    match?: string | RegExp | types.Matcher;
    exact?: boolean;
    truncate?: boolean;
@@ -79,7 +87,10 @@ export const Match: React.FC<MatchProps> = (props) => {
 };
 
 export const Route: React.FC<MatchProps> = ({children, render = children, ...rest}) =>
-   h(Match, {...rest, render: (data) => data.matches ? (typeof render === 'function' ? render(data) : render || null) : null});
+   h(Match, {
+      ...rest,
+      render: (data) => (data.matches ? (typeof render === 'function' ? render(data) : render || null) : null),
+   });
 
 export interface SwitchProps {
    children: React.ReactElement[];
@@ -107,7 +118,9 @@ export interface RedirectProps extends types.GoParams {
 }
 
 export const Redirect: React.FC<RedirectProps> = ({to, ...params}) => {
-   useIsomorphicLayoutEffect(() => { go(to, params) }, []);
+   useIsomorphicLayoutEffect(() => {
+      go(to, params);
+   }, []);
    return null;
 };
 
@@ -123,16 +136,7 @@ export interface LinkProps extends React.AllHTMLAttributes<any> {
 }
 
 export const Link: React.FC<LinkProps> = React.forwardRef<any, LinkProps>((props, ref) => {
-   const {
-      replace,
-      state,
-      to = '',
-      a,
-      comp = a ? 'a' : 'button',
-      onClick: originalClick,
-      target,
-      ...rest
-   } = props;
+   const {replace, state, to = '', a, comp = a ? 'a' : 'button', onClick: originalClick, target, ...rest} = props;
    const onClick = React.useCallback(
       (event) => {
          if (
