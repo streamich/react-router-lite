@@ -43,7 +43,6 @@ export const Memory: StoryObj<typeof meta> = {
    render: () => <Demo />,
 };
 
-
 const Demo2: React.FC<{}> = () => {
    const route = useObservable(pathname$, pathname$.getValue());
 
@@ -66,7 +65,6 @@ const Demo2: React.FC<{}> = () => {
 export const RealNavigation: StoryObj<typeof meta> = {
    render: () => <Demo2 />,
 };
-
 
 const Demo3: React.FC<{}> = () => {
    const location = useLocation();

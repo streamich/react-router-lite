@@ -16,6 +16,8 @@
       "lib/"
    ],
    "scripts": {
+      "prettier": "npx prettier@3.2.5 --write .",
+      "prettier:check": "npx prettier@3.2.5 --check .",
       "tslint": "tslint 'src/**/*.{js,jsx,ts,tsx}' -t verbose",
       "clean": "rimraf lib",
       "build": "tsc",
