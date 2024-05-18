@@ -1,10 +1,20 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import {Provider, Route, Link, go} from '../memory';
+import {Router, Route, Link, go} from '..';
+import {createMemoryHistory} from 'history';
 
 const Demo: React.FC<{}> = () => {
+   const history = React.useMemo(() => createMemoryHistory(), []);
+   const [route, setRoute] = React.useState(history.location.pathname);
+   React.useEffect(() => {
+      const unsubscribe = history.listen(() => {
+         setRoute(history.location.pathname);
+      });
+      return () => unsubscribe();
+   }, [history]);
+
    return (
-      <Provider>
+      <Router route={route}>
          <div>
             <div>
                <button onClick={() => go('page-1')}>Page 1</button>
@@ -15,7 +25,7 @@ const Demo: React.FC<{}> = () => {
                <Route match="/page-2">This is page two</Route>
             </div>
          </div>
-      </Provider>
+      </Router>
    );
 };
 

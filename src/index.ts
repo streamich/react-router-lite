@@ -1,12 +1,16 @@
+import type * as types from './types';
 import * as React from 'react';
 import {go} from './go';
-import type * as types from './types';
 
-const h = React.createElement;
-
+export type * from './types';
 export {go};
 
-const context = React.createContext<types.RouterContextValue>(null!);
+const h = React.createElement;
+const defaultGo = go;
+
+export const context = React.createContext<types.RouterContextValue>(null!);
+
+// ------------------------------------------------------------------- <Router>
 
 export interface RouterProps {
    route: string;
@@ -24,6 +28,8 @@ export const Router: React.FC<RouterProps> = (props) => {
    };
    return h(context.Provider, {value}, children);
 };
+
+// -------------------------------------------------------------------- <Match>
 
 const createMatcher = (match: string | RegExp | types.Matcher, exact?: boolean): types.Matcher => {
    if (typeof match === 'function') return match;
@@ -56,15 +62,11 @@ export const useMatch = (match: string | RegExp | types.Matcher, exact?: boolean
 
 export interface MatchProps {
    render?:
-      | ((data: types.MatchData) => React.ReactElement[] | React.ReactElement | null)
-      | React.ReactElement[]
-      | React.ReactElement
-      | null;
+      | ((data: types.MatchData) => React.ReactNode)
+      | React.ReactNode;
    children?:
-      | ((data: types.MatchData) => React.ReactElement[] | React.ReactElement | null)
-      | React.ReactElement[]
-      | React.ReactElement
-      | null;
+      | ((data: types.MatchData) => React.ReactNode)
+      | React.ReactNode;
    match?: string | RegExp | types.Matcher;
    exact?: boolean;
    truncate?: boolean;
@@ -86,11 +88,15 @@ export const Match: React.FC<MatchProps> = (props) => {
    return element instanceof Array ? h(React.Fragment, null, element) : element;
 };
 
+// -------------------------------------------------------------------- <Route>
+
 export const Route: React.FC<MatchProps> = ({children, render = children, ...rest}) =>
    h(Match, {
       ...rest,
       render: (data) => (data.matches ? (typeof render === 'function' ? render(data) : render || null) : null),
    });
+
+// -------------------------------------------------------------------- <Switch>
 
 export interface SwitchProps {
    children: React.ReactElement[];
@@ -110,6 +116,8 @@ export const Switch: React.FC<SwitchProps> = ({children}) => {
    return null;
 };
 
+// ----------------------------------------------------------------- <Redirect>
+
 const isBrowser = typeof window !== 'undefined';
 const useIsomorphicLayoutEffect = isBrowser ? React.useLayoutEffect : React.useEffect;
 
@@ -118,6 +126,7 @@ export interface RedirectProps extends types.GoParams {
 }
 
 export const Redirect: React.FC<RedirectProps> = ({to, ...params}) => {
+   const go = React.useContext(context).go || defaultGo;
    useIsomorphicLayoutEffect(() => {
       go(to, params);
    }, []);
@@ -135,8 +144,11 @@ export interface LinkProps extends React.AllHTMLAttributes<any> {
    comp?: string | React.ComponentType<any>;
 }
 
+// --------------------------------------------------------------------- <Link>
+
 export const Link: React.FC<LinkProps> = React.forwardRef<any, LinkProps>((props, ref) => {
    const {replace, state, to = '', a, comp = a ? 'a' : 'button', onClick: originalClick, target, ...rest} = props;
+   const go = React.useContext(context).go || defaultGo;
    const onClick = React.useCallback(
       (event) => {
          if (
