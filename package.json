@@ -21,13 +21,18 @@
    "scripts": {
       "prettier": "npx prettier@3.2.5 --write .",
       "prettier:check": "npx prettier@3.2.5 --check .",
-      "tslint": "tslint 'src/**/*.{js,jsx,ts,tsx}' -t verbose",
+      "lint": "tslint 'src/**/*.{js,jsx,ts,tsx}' -t verbose",
       "clean": "npx rimraf@5.0.5 lib es6 es2019 es2020 esm typedocs coverage gh-pages yarn-error.log",
       "build": "tsc --project tsconfig.build.json --module commonjs --target es2020 --outDir lib",
       "test": "jest --no-cache --config='jest.config.js'",
       "release": "semantic-release",
       "storybook": "storybook dev -p 6006",
-      "build-storybook": "storybook build"
+      "build-storybook": "storybook build",
+      "coverage": "yarn test --collectCoverage",
+      "typedoc": "npx typedoc@0.25.13 --tsconfig tsconfig.build.json",
+      "build:pages": "npx rimraf@5.0.5 gh-pages && mkdir -p gh-pages && cp -r typedocs/* gh-pages && cp -r coverage gh-pages/coverage && cp -r coverage gh-pages/storybook",
+      "deploy:pages": "gh-pages -d gh-pages",
+      "publish-coverage-and-typedocs": "yarn typedoc && yarn coverage && yarn build:pages && yarn deploy:pages"
    },
    "keywords": [],
    "peerDependencies": {

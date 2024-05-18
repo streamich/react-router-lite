@@ -1,3 +1,3 @@
-const { TextEncoder, TextDecoder } = require('util');
+const {TextEncoder, TextDecoder} = require('util');
 
-Object.assign(global, { TextDecoder, TextEncoder });
+Object.assign(global, {TextDecoder, TextEncoder});
