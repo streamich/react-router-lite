@@ -141,12 +141,26 @@ export interface LinkProps extends React.AllHTMLAttributes<any> {
    state?: any | ((props: LinkProps) => any);
    to?: string;
    a?: boolean;
+   external?: boolean;
    comp?: string | React.ComponentType<any>;
 }
 
+const EXTERNAL_REGEX = /(^https?:)?\/\/.+/;
+const isExternal = (to: string) => EXTERNAL_REGEX.test(to);
+
 export const Link: React.FC<LinkProps> = React.forwardRef<any, LinkProps>((props, ref) => {
-   const {replace, state, to = '', a, comp = a ? 'a' : 'button', onClick: originalClick, target, ...rest} = props;
-   const go = React.useContext(context).go || defaultGo;
+   const {
+      replace,
+      state,
+      to = '',
+      a,
+      comp = a ? 'a' : 'button',
+      onClick: originalClick,
+      target,
+      external,
+      ...rest
+   } = props;
+   const go = React.useContext(context)?.go || defaultGo;
    const onClick = React.useCallback(
       (event) => {
          if (
@@ -155,11 +169,13 @@ export const Link: React.FC<LinkProps> = React.forwardRef<any, LinkProps>((props
             !target && // let browser handle "target=*"
             !isModifiedEvent(event) // ignore clicks with modifier keys
          ) {
-            event.preventDefault();
-            go(to, {
-               replace,
-               state: state ? state(props) : undefined,
-            });
+            if (!(external || isExternal(to))) {
+               event.preventDefault();
+               go(to, {
+                  replace,
+                  state: state ? state(props) : undefined,
+               });
+            }
             if (originalClick) originalClick(event);
          }
       },
@@ -173,6 +189,10 @@ export const Link: React.FC<LinkProps> = React.forwardRef<any, LinkProps>((props
    if (comp === 'a') {
       attr.href = to;
       attr.target = target;
+      if (external || isExternal(to)) {
+         attr.target = '_blank';
+         attr.rel = 'noopener noreferrer';
+      }
    }
    return h(comp, attr);
 });
