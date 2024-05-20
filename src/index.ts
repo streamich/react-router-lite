@@ -149,7 +149,17 @@ const EXTERNAL_REGEX = /(^https?:)?\/\/.+/;
 const isExternal = (to: string) => EXTERNAL_REGEX.test(to);
 
 export const Link: React.FC<LinkProps> = React.forwardRef<any, LinkProps>((props, ref) => {
-   const {replace, state, to = '', a, comp = a ? 'a' : 'button', onClick: originalClick, target, external, ...rest} = props;
+   const {
+      replace,
+      state,
+      to = '',
+      a,
+      comp = a ? 'a' : 'button',
+      onClick: originalClick,
+      target,
+      external,
+      ...rest
+   } = props;
    const go = React.useContext(context)?.go || defaultGo;
    const onClick = React.useCallback(
       (event) => {
