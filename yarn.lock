@@ -1050,11 +1050,14 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@chromatic-com/storybook@^1.4.0":
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/@chromatic-com/storybook/-/storybook-1.6.1.tgz#42173679c166ce982903b9e40bb457c037e9dac2"
-  integrity sha512-x1x1NB3j4xpfeSWKr96emc+7ZvfsvH+/WVb3XCjkB24PPbT8VZXb3mJSAQMrSzuQ8+eQE9kDogYHH9Fj3tb/Cw==
+"@chromatic-com/storybook@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@chromatic-com/storybook/-/storybook-3.0.0.tgz#e23f125ab7f66f15cf94609a1684a6a96eba438e"
+  integrity sha512-6o2/RRs59vcPFehnFC/phX+SZK3ByPN3ix7jr+v+pZAMwliDppFF0GEJ4+SKTaoKY8NtPs0JTFDSQnY1YWgK3Q==
   dependencies:
+    "@storybook/channels" "^8.3.0"
+    "@storybook/telemetry" "^8.3.0"
+    "@storybook/types" "^8.3.0"
     chromatic "^11.4.0"
     filesize "^10.0.12"
     jsonfile "^6.1.0"
@@ -2032,6 +2035,11 @@
     webpack-hot-middleware "^2.25.1"
     webpack-virtual-modules "^0.6.0"
 
+"@storybook/channels@^8.3.0":
+  version "8.3.6"
+  resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-8.3.6.tgz#b19b1b00773ff1fbabf0e1bd7e00e1784f599a2e"
+  integrity sha512-6ahY0n1A19diR5cI63lhDEpMaDsq7LFtMOgWab2NwCsdXoEAl6anvDptyPWW60umN3HrDzSKFdpRx4imOEjlWw==
+
 "@storybook/codemod@8.2.2":
   version "8.2.2"
   resolved "https://registry.yarnpkg.com/@storybook/codemod/-/codemod-8.2.2.tgz#b5cd20911d40e11647c2bf0fe97a658f53d7ddef"
@@ -2179,6 +2187,11 @@
     type-fest "~2.19"
     util-deprecate "^1.0.2"
 
+"@storybook/telemetry@^8.3.0":
+  version "8.3.6"
+  resolved "https://registry.yarnpkg.com/@storybook/telemetry/-/telemetry-8.3.6.tgz#8c108312fd6809a8d9d0a0e8553d067089d89ae2"
+  integrity sha512-fhpbZok7mPeujjFxAKo2vuqhfjhv5BO/mHH7Z8QtgsYqeR7px56arDRgV6CngBZWgFvrQ2wBS0HPV4nB6YWvJQ==
+
 "@storybook/test@8.2.2", "@storybook/test@^8.1.1":
   version "8.2.2"
   resolved "https://registry.yarnpkg.com/@storybook/test/-/test-8.2.2.tgz#d85725adc9b4bd998560911ef899911e91f56512"
@@ -2192,6 +2205,11 @@
     "@vitest/expect" "1.6.0"
     "@vitest/spy" "1.6.0"
     util "^0.12.4"
+
+"@storybook/types@^8.3.0":
+  version "8.3.6"
+  resolved "https://registry.yarnpkg.com/@storybook/types/-/types-8.3.6.tgz#8c5c15e8869dd3218a73748db75bb7ef709262b9"
+  integrity sha512-EY+bjIxxmKkFrL7CyDQb3EXbmy0+Y9OieaPrNNM7QXTfGgp81lXhfqMX3HLMMjplk+rcxVJLyzXSBx0nIn91fQ==
 
 "@swc/core-darwin-arm64@1.5.7":
   version "1.5.7"
